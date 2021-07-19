@@ -33,13 +33,16 @@ function createCard(card) {
   let cardColumn = document.getElementById('column' + card.column_id);
   console.log(cardColumn);
 
-  let cardName = document.createElement('h4')
+  let cardName = document.createElement('h4');
   cardName.innerText = card.name;
+
+  let cardDescription = document.createElement('p');
+  cardDescription.innerText = card.description;
 
   let columnCard = document.createElement('div');
   columnCard.setAttribute('class', 'box');
   columnCard.setAttribute('id', 'card' + card.id);
-  columnCard.append(cardName);
+  columnCard.append(cardName, cardDescription);
   cardColumn.append(columnCard);
 }
 
