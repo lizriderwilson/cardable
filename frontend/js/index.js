@@ -5,6 +5,11 @@ function getColumns() {
   .then(response => response.json());
 }
 
+function getCards() {
+  return fetch('http://localhost:3000/cards')
+  .then(response => response.json());
+}
+
 function sanitizeName(name) {
   return name.replace(" ", "-").toLowerCase();
 }
@@ -12,17 +17,40 @@ function sanitizeName(name) {
 function createColumn(column) {
   let columnName = document.createElement('h3')
   columnName.innerText = column.name;
-  columnName.setAttribute('class', 'has-text-centered has-background-light')
+
+  let columnInnerDiv = document.createElement('div')
+  columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light')
+  columnInnerDiv.append(columnName);
 
   let boardColumn = document.createElement('div');
   boardColumn.setAttribute('class', 'column');
-  boardColumn.setAttribute('id', sanitizeName(column.name) + '-column');
-  boardColumn.append(columnName);
+  boardColumn.setAttribute('id', 'column' + column.id);
+  boardColumn.append(columnInnerDiv);
   columnContainer.append(boardColumn);
+}
+
+function createCard(card) {
+  let cardColumn = document.getElementById('column' + card.column_id);
+  console.log(cardColumn);
+
+  let cardName = document.createElement('h4')
+  cardName.innerText = card.name;
+
+  let columnCard = document.createElement('div');
+  columnCard.setAttribute('class', 'box');
+  columnCard.setAttribute('id', 'card' + card.id);
+  columnCard.append(cardName);
+  cardColumn.append(columnCard);
 }
 
 getColumns().then(columns => {
   columns.forEach(column => {
     createColumn(column);
+  })
+})
+
+getCards().then(cards => {
+  cards.forEach(card => {
+    createCard(card);
   })
 })
