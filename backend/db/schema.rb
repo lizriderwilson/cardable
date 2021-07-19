@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_19_143534) do
+ActiveRecord::Schema.define(version: 2021_07_19_162724) do
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "column_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["column_id"], name: "index_cards_on_column_id"
+  end
 
   create_table "columns", force: :cascade do |t|
     t.string "name"
@@ -18,4 +27,5 @@ ActiveRecord::Schema.define(version: 2021_07_19_143534) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "cards", "columns"
 end
