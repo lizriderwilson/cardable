@@ -1,5 +1,3 @@
-const allColumns = [];
-
 class Column {
   static allColumns = [];
   constructor(attrs) {

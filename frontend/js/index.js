@@ -30,31 +30,37 @@ function sanitizeName(name) {
 //   columnContainer.append(boardColumn);
 // }
 
-function createCard(card) {
-  //console.log(card.column_id)
-  let cardColumn = document.getElementById("column" + card.column_id).firstChild;
-  //console.log(cardColumn);
+// function createCard(card) {
+//   //console.log(card.column_id)
+//   let cardColumn = document.getElementById("column" + card.column_id).firstChild;
+//   //console.log(cardColumn);
 
-  let cardName = document.createElement('h4');
-  cardName.innerText = card.name;
+//   let cardName = document.createElement('h4');
+//   cardName.innerText = card.name;
 
-  let cardDescription = document.createElement('p');
-  cardDescription.innerText = card.description;
+//   let cardDescription = document.createElement('p');
+//   cardDescription.innerText = card.description;
 
-  let columnCard = document.createElement('div');
-  columnCard.setAttribute('class', 'box has-background-white-bis');
-  columnCard.setAttribute('id', 'card' + card.id);
-  columnCard.append(cardName, cardDescription);
-  cardColumn.append(columnCard);
-}
+//   let columnCard = document.createElement('div');
+//   columnCard.setAttribute('class', 'box has-background-white-bis');
+//   columnCard.setAttribute('id', 'card' + card.id);
+//   columnCard.append(cardName, cardDescription);
+//   cardColumn.append(columnCard);
+// }
 
 getColumns().then(columns => {
   columns.map(column => {
     new Column(column);
   });
   Column.all().map(column => column.createColumn());
-  })
+});
 
+getCards().then(cards => {
+  cards.map(card => {
+    new Card(card);
+  });
+  Card.all().map(card => card.createCard());
+});
 // getCards().then(cards => {
 //   cards.forEach(card => {
 //     createCard(card);
