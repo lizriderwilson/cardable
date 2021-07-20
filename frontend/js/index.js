@@ -14,21 +14,21 @@ function sanitizeName(name) {
   return name.replace(" ", "-").toLowerCase();
 }
 
-function createColumn(column) {
-  let columnName = document.createElement('h3')
-  columnName.setAttribute('class', 'is-size-4 mb-2')
-  columnName.innerText = column.name;
+// function createColumn(column) {
+//   let columnName = document.createElement('h3')
+//   columnName.setAttribute('class', 'is-size-4 mb-2')
+//   columnName.innerText = column.name;
 
-  let columnInnerDiv = document.createElement('div')
-  columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3')
-  columnInnerDiv.append(columnName);
+//   let columnInnerDiv = document.createElement('div')
+//   columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3')
+//   columnInnerDiv.append(columnName);
 
-  let boardColumn = document.createElement('div');
-  boardColumn.setAttribute('class', 'column');
-  boardColumn.setAttribute('id', 'column' + column.id);
-  boardColumn.append(columnInnerDiv);
-  columnContainer.append(boardColumn);
-}
+//   let boardColumn = document.createElement('div');
+//   boardColumn.setAttribute('class', 'column');
+//   boardColumn.setAttribute('id', 'column' + column.id);
+//   boardColumn.append(columnInnerDiv);
+//   columnContainer.append(boardColumn);
+// }
 
 function createCard(card) {
   //console.log(card.column_id)
@@ -49,13 +49,15 @@ function createCard(card) {
 }
 
 getColumns().then(columns => {
-  columns.forEach(column => {
-    createColumn(column);
+  columns.map(column => {
+    new Column(column);
+  });
+  Column.all().map(column => column.createColumn());
   })
-})
 
-getCards().then(cards => {
-  cards.forEach(card => {
-    createCard(card);
-  })
-})
+// getCards().then(cards => {
+//   cards.forEach(card => {
+//     createCard(card);
+//   })
+// })
+
