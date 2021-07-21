@@ -24,9 +24,15 @@ class Column {
     formField.append(formControl);
 
     let formInput = document.createElement('input');
-    formInput.setAttribute('class', 'input');
-    formInput.setAttribute('placeholder', 'New Card');
-    cardForm.append(formInput);
+    formInput.setAttribute('class', 'input mb-4');
+    formInput.setAttribute('placeholder', 'Enter a title');
+    formControl.append(formInput);
+
+    let newCardButton = document.createElement('button');
+    newCardButton.setAttribute('class', 'button is-link');
+    newCardButton.innerText = "+"
+    formControl.append(newCardButton);
+
     return cardForm;
   }
 
