@@ -14,6 +14,7 @@ class Card {
 
   createCard() {
   let cardColumn = document.getElementById("column" + this.column_id).firstChild;
+  let columnForm = document.getElementById("form" + this.column_id);
 
   let cardName = document.createElement('h4');
   cardName.innerText = this.name;
@@ -25,7 +26,7 @@ class Card {
   columnCard.setAttribute('class', 'box has-background-white-bis');
   columnCard.setAttribute('id', 'card' + this.id);
   columnCard.append(cardName, cardDescription);
-  cardColumn.append(columnCard);
+  cardColumn.insertBefore(columnCard, columnForm);
 }
 
 }

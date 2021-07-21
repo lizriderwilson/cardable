@@ -11,12 +11,22 @@ class Column {
   }
 
   createForm() {
-    let cardForm = document.createElement('div');
+    let cardForm = document.createElement('form');
     cardForm.setAttribute('class', 'box has-background-white-bis');
+    cardForm.setAttribute('id', 'form' + this.id);
 
-    let formHeader = document.createElement('h4');
-    formHeader.innerText = "New Card";
-    cardForm.append(formHeader);
+    let formField = document.createElement('div');
+    formField.setAttribute('class', 'field');
+    cardForm.append(formField);
+
+    let formControl = document.createElement('div');
+    formControl.setAttribute('class', 'control');
+    formField.append(formControl);
+
+    let formInput = document.createElement('input');
+    formInput.setAttribute('class', 'input');
+    formInput.setAttribute('placeholder', 'New Card');
+    cardForm.append(formInput);
     return cardForm;
   }
 
