@@ -10,6 +10,16 @@ class Column {
     return Column.allColumns;
   }
 
+  createForm() {
+    let cardForm = document.createElement('div');
+    cardForm.setAttribute('class', 'box has-background-white-bis');
+
+    let formHeader = document.createElement('h4');
+    formHeader.innerText = "New Card";
+    cardForm.append(formHeader);
+    return cardForm;
+  }
+
   createColumn() {
     let columnName = document.createElement('h3')
     columnName.setAttribute('class', 'is-size-4 mb-2')
@@ -18,6 +28,8 @@ class Column {
     let columnInnerDiv = document.createElement('div')
     columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3')
     columnInnerDiv.append(columnName);
+    columnInnerDiv.append(this.createForm());
+
   
     let boardColumn = document.createElement('div');
     boardColumn.setAttribute('class', 'column');
