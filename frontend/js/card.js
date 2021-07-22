@@ -29,4 +29,28 @@ class Card {
   cardColumn.insertBefore(columnCard, columnForm);
 }
 
+postCard(event) {
+  const columnID = parseInt(event.target.parentElement.parentElement.parentElement.id.slice(-1));
+  const cardName = event.target.value;
+  const data = {
+    name: cardName,
+    column_id: columnID
+  }
+  fetch('http://localhost:3000/cards', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(card => {
+    if (card.id) {
+    let newCard = new Card(card);
+    newCard.createCard();
+    }
+  });
+}
+
 }

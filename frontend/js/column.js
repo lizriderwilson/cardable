@@ -30,6 +30,14 @@ class Column {
     formInput.setAttribute('placeholder', 'Enter a title');
     formControl.append(formInput);
 
+    formInput.addEventListener("keydown", (e) => {
+      e.preventDefault
+      if (e.key === "Enter") {
+        let newCard = new Card({name: e.target.value, column_id: this.id});
+        newCard.postCard(e);
+      }
+    })
+
     let newCardButton = document.createElement('button');
     newCardButton.setAttribute('class', 'button is-link');
     newCardButton.innerText = "+"
