@@ -18,6 +18,7 @@ class Column {
 
     let formField = document.createElement('div');
     formField.setAttribute('class', 'field');
+    formField.style.display = "none";
     cardForm.append(formField);
 
     let formControl = document.createElement('div');
@@ -33,6 +34,17 @@ class Column {
     newCardButton.setAttribute('class', 'button is-link');
     newCardButton.innerText = "+"
     cardForm.append(newCardButton);
+    
+    let addCard = false;
+    newCardButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      addCard = !addCard;
+      if (addCard) {
+        formField.style.display = "block";
+      } else {
+        formField.style.display = "none";
+      }
+    });
 
     return cardForm;
   }
