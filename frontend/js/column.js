@@ -3,6 +3,7 @@ class Column {
   constructor(attrs) {
     this.id = attrs.id;
     this.name = attrs.name;
+    this.cards = attrs.cards;
     Column.allColumns.push(this);
   }
 
@@ -31,7 +32,7 @@ class Column {
     let newCardButton = document.createElement('button');
     newCardButton.setAttribute('class', 'button is-link');
     newCardButton.innerText = "+"
-    formControl.append(newCardButton);
+    cardForm.append(newCardButton);
 
     return cardForm;
   }
