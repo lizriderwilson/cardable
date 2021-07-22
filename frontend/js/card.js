@@ -12,6 +12,12 @@ class Card {
     return Card.allCards;
   }
 
+  dragstart_handler(ev) {
+    // Add the target element's id to the data transfer object
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+    ev.dataTransfer.dropEffect = "move";
+  }
+
   createCard() {
   let cardColumn = document.getElementById("column" + this.column_id).firstChild;
   let columnForm = document.getElementById("form" + this.column_id);
@@ -22,11 +28,22 @@ class Card {
   let cardDescription = document.createElement('p');
   cardDescription.innerText = this.description;
 
+  let deleteButton = document.createElement('button');
+  deleteButton.innerText = "X";
+  deleteButton.setAttribute('class', 'button is-warning')
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault;
+    columnCard.remove();
+  });
+
   let columnCard = document.createElement('div');
   columnCard.setAttribute('class', 'box has-background-white-bis');
   columnCard.setAttribute('id', 'card' + this.id);
-  columnCard.append(cardName, cardDescription);
+  columnCard.setAttribute('draggable', 'true');
+  columnCard.append(cardName, cardDescription, deleteButton);
   cardColumn.insertBefore(columnCard, columnForm);
+
+  columnCard.addEventListener('dragstart', Card.dragstart_handler)
 }
 
 postCard(event) {

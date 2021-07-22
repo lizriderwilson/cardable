@@ -15,3 +15,6 @@ getColumns().then(columns => {
   Column.all().map(column => column.createColumn());
   Card.all().map(card => card.createCard());
 });
+
+// DRAG AND DROP
+
