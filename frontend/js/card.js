@@ -18,7 +18,7 @@ class Card {
   // }
 
   createCard() {
-  let cardColumn = document.getElementById("column" + this.column_id).firstChild;
+  let cardWrapper = document.getElementById("wrapper" + this.column_id);
   let columnForm = document.getElementById("form" + this.column_id);
 
   let cardName = document.createElement('h4');
@@ -41,7 +41,7 @@ class Card {
   columnCard.setAttribute('draggable', 'true');
   columnCard.setAttribute('ondragstart', 'drag(event)');
   columnCard.append(cardName, cardDescription, deleteButton);
-  cardColumn.insertBefore(columnCard, columnForm);
+  cardWrapper.append(columnCard);
 }
 
 postCard(event) {
