@@ -64,7 +64,8 @@ class Column {
 
     let taskWrapper = document.createElement('div');
     taskWrapper.setAttribute('id', 'wrapper' + this.id);
-    taskWrapper.setAttribute('ondrop', 'drop(event)');
+    taskWrapper.setAttribute('class', 'pt-2 pb-5');
+    taskWrapper.setAttribute('ondrop', 'drop(event, this)');
     taskWrapper.setAttribute('ondragover', 'allowDrop(event)');
 
     let columnInnerDiv = document.createElement('div');

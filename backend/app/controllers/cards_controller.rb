@@ -10,4 +10,10 @@ class CardsController < ApplicationController
     render json: card
   end
 
+  def update
+    card = Card.find_by(id: params["id"])
+    card.update(column_id: params["column_id"])
+    render json: card
+  end
+
 end

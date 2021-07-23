@@ -19,7 +19,6 @@ class Card {
 
   createCard() {
   let cardWrapper = document.getElementById("wrapper" + this.column_id);
-  let columnForm = document.getElementById("form" + this.column_id);
 
   let cardName = document.createElement('h4');
   cardName.innerText = this.name;
@@ -64,6 +63,29 @@ postCard(event) {
     if (card.id) {
     let newCard = new Card(card);
     newCard.createCard();
+    }
+  });
+}
+
+updateCard(el) {
+  const columnId = el.id.slice(-1);
+  const cardId = this.id;
+  const data = {
+    id: cardId,
+    column_id: columnId
+  }
+  fetch('http://localhost:3000/cards/' + this.id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(card => {
+    if (card) {
+    this.column_id = columnId;
     }
   });
 }
