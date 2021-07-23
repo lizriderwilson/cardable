@@ -12,11 +12,10 @@ class Card {
     return Card.allCards;
   }
 
-  dragstart_handler(ev) {
-    // Add the target element's id to the data transfer object
-    ev.dataTransfer.setData("text/plain", ev.target.id);
-    ev.dataTransfer.dropEffect = "move";
-  }
+  // drag(ev) {
+  //   ev.dataTransfer.setData("text", ev.target.id);
+  //   console.log(ev)
+  // }
 
   createCard() {
   let cardColumn = document.getElementById("column" + this.column_id).firstChild;
@@ -40,10 +39,9 @@ class Card {
   columnCard.setAttribute('class', 'box has-background-white-bis');
   columnCard.setAttribute('id', 'card' + this.id);
   columnCard.setAttribute('draggable', 'true');
+  columnCard.setAttribute('ondragstart', 'drag(event)');
   columnCard.append(cardName, cardDescription, deleteButton);
   cardColumn.insertBefore(columnCard, columnForm);
-
-  columnCard.addEventListener('dragstart', Card.dragstart_handler)
 }
 
 postCard(event) {

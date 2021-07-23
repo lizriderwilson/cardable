@@ -58,15 +58,17 @@ class Column {
   }
 
   createColumn() {
-    let columnName = document.createElement('h3')
-    columnName.setAttribute('class', 'is-size-4 mb-2')
+    let columnName = document.createElement('h3');
+    columnName.setAttribute('class', 'is-size-4 mb-2');
     columnName.innerText = this.name;
   
-    let columnInnerDiv = document.createElement('div')
-    columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3')
+    let columnInnerDiv = document.createElement('div');
+    columnInnerDiv.setAttribute('id', 'wrapper' + this.id);
+    columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3');
+    columnInnerDiv.setAttribute('ondrop', 'drop(event)');
+    columnInnerDiv.setAttribute('ondragover', 'allowDrop(event)')
     columnInnerDiv.append(columnName);
     columnInnerDiv.append(this.createForm());
-
   
     let boardColumn = document.createElement('div');
     boardColumn.setAttribute('class', 'column');
