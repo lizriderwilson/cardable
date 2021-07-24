@@ -39,7 +39,9 @@ class Card {
   deleteButton.setAttribute('class', 'delete has-background-warning')
   deleteButton.addEventListener('click', (e) => {
     e.preventDefault;
+    this.deleteCard();
     newCard.remove();
+
   });
   mediaRight.append(deleteButton);
 
@@ -93,6 +95,17 @@ updateCard(el) {
     this.column_id = columnId;
     }
   });
+}
+
+deleteCard() {
+  fetch('http://localhost:3000/cards/' + this.id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(this)
+  })
 }
 
 }
