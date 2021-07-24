@@ -5,6 +5,7 @@ class Card {
     this.name = attrs.name;
     this.description = attrs.description;
     this.column_id = attrs.column_id;
+    this.priority = attrs.priority;
     Card.allCards.push(this);
   }
 
@@ -12,35 +13,39 @@ class Card {
     return Card.allCards;
   }
 
-  // drag(ev) {
-  //   ev.dataTransfer.setData("text", ev.target.id);
-  //   console.log(ev)
-  // }
-
   createCard() {
   let cardWrapper = document.getElementById("wrapper" + this.column_id);
 
+  let newCard = document.createElement('div');
+  newCard.setAttribute('class', 'box has-background-white-bis');
+  newCard.setAttribute('id', 'card' + this.id);
+  newCard.setAttribute('draggable', 'true');
+  newCard.setAttribute('ondragstart', 'drag(event)');
+
+  let cardMedia = document.createElement('article');
+  cardMedia.setAttribute('class', 'media');
+
+  let mediaContent = document.createElement('div');
+  mediaContent.setAttribute('class', 'media-content');
   let cardName = document.createElement('h4');
   cardName.innerText = this.name;
-
   let cardDescription = document.createElement('p');
   cardDescription.innerText = this.description;
+  mediaContent.append(cardName, cardDescription);
 
+  let mediaRight = document.createElement('div');
+  mediaRight.setAttribute('class', 'media-right');
   let deleteButton = document.createElement('button');
-  deleteButton.innerText = "X";
-  deleteButton.setAttribute('class', 'button is-warning')
+  deleteButton.setAttribute('class', 'delete has-background-warning')
   deleteButton.addEventListener('click', (e) => {
     e.preventDefault;
-    columnCard.remove();
+    newCard.remove();
   });
+  mediaRight.append(deleteButton);
 
-  let columnCard = document.createElement('div');
-  columnCard.setAttribute('class', 'box has-background-white-bis');
-  columnCard.setAttribute('id', 'card' + this.id);
-  columnCard.setAttribute('draggable', 'true');
-  columnCard.setAttribute('ondragstart', 'drag(event)');
-  columnCard.append(cardName, cardDescription, deleteButton);
-  cardWrapper.append(columnCard);
+  cardMedia.append(mediaContent, mediaRight);
+  newCard.append(cardMedia);
+  cardWrapper.append(newCard);
 }
 
 postCard(event) {
