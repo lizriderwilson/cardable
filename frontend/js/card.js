@@ -5,6 +5,7 @@ class Card {
     this.name = attrs.name;
     this.description = attrs.description;
     this.column_id = attrs.column_id;
+    this.priority = attrs.priority;
     Card.allCards.push(this);
   }
 
@@ -13,20 +14,40 @@ class Card {
   }
 
   createCard() {
-  let cardColumn = document.getElementById("column" + this.column_id).firstChild;
-  let columnForm = document.getElementById("form" + this.column_id);
+  let cardWrapper = document.getElementById("wrapper" + this.column_id);
 
+  let newCard = document.createElement('div');
+  newCard.setAttribute('class', 'box has-background-white-bis');
+  newCard.setAttribute('id', 'card' + this.id);
+  newCard.setAttribute('draggable', 'true');
+  newCard.setAttribute('ondragstart', 'drag(event)');
+
+  let cardMedia = document.createElement('article');
+  cardMedia.setAttribute('class', 'media');
+
+  let mediaContent = document.createElement('div');
+  mediaContent.setAttribute('class', 'media-content');
   let cardName = document.createElement('h4');
   cardName.innerText = this.name;
-
   let cardDescription = document.createElement('p');
   cardDescription.innerText = this.description;
+  mediaContent.append(cardName, cardDescription);
 
-  let columnCard = document.createElement('div');
-  columnCard.setAttribute('class', 'box has-background-white-bis');
-  columnCard.setAttribute('id', 'card' + this.id);
-  columnCard.append(cardName, cardDescription);
-  cardColumn.insertBefore(columnCard, columnForm);
+  let mediaRight = document.createElement('div');
+  mediaRight.setAttribute('class', 'media-right');
+  let deleteButton = document.createElement('button');
+  deleteButton.setAttribute('class', 'delete has-background-warning')
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault;
+    this.deleteCard();
+    newCard.remove();
+
+  });
+  mediaRight.append(deleteButton);
+
+  cardMedia.append(mediaContent, mediaRight);
+  newCard.append(cardMedia);
+  cardWrapper.append(newCard);
 }
 
 postCard(event) {
@@ -51,6 +72,40 @@ postCard(event) {
     newCard.createCard();
     }
   });
+}
+
+updateCard(el) {
+  const columnId = el.id.slice(-1);
+  const cardId = this.id;
+  const data = {
+    id: cardId,
+    column_id: columnId
+  }
+  fetch('http://localhost:3000/cards/' + this.id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(card => {
+    if (card) {
+    this.column_id = columnId;
+    }
+  });
+}
+
+deleteCard() {
+  fetch('http://localhost:3000/cards/' + this.id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(this)
+  })
 }
 
 }

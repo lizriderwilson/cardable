@@ -15,10 +15,10 @@ class Column {
     let cardForm = document.createElement('form');
     cardForm.setAttribute('class', 'box has-background-white-bis');
     cardForm.setAttribute('id', 'form' + this.id);
+    cardForm.style.display = "none";
 
     let formField = document.createElement('div');
     formField.setAttribute('class', 'field');
-    formField.style.display = "none";
     cardForm.append(formField);
 
     let formControl = document.createElement('div');
@@ -26,52 +26,63 @@ class Column {
     formField.append(formControl);
 
     let formInput = document.createElement('input');
-    formInput.setAttribute('class', 'input mb-4');
+    formInput.setAttribute('class', 'input');
     formInput.setAttribute('placeholder', 'Enter a title');
     formControl.append(formInput);
 
     formInput.addEventListener("keydown", (e) => {
-      e.preventDefault
       if (e.key === "Enter") {
+      e.preventDefault();
         let newCard = new Card({name: e.target.value, column_id: this.id});
         newCard.postCard(e);
+        e.target.value = "";
+
       }
     })
-
-    let newCardButton = document.createElement('button');
-    newCardButton.setAttribute('class', 'button is-link');
-    newCardButton.innerText = "+"
-    cardForm.append(newCardButton);
-    
-    let addCard = false;
-    newCardButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      addCard = !addCard;
-      if (addCard) {
-        formField.style.display = "block";
-      } else {
-        formField.style.display = "none";
-      }
-    });
 
     return cardForm;
   }
 
   createColumn() {
-    let columnName = document.createElement('h3')
-    columnName.setAttribute('class', 'is-size-4 mb-2')
+    let columnHeader = document.createElement('div');
+    columnHeader.setAttribute('class', 'media pb-2');
+    
+    let columnName = document.createElement('h3');
+    columnName.setAttribute('class', 'media-left is-size-4 mb-2');
     columnName.innerText = this.name;
-  
-    let columnInnerDiv = document.createElement('div')
-    columnInnerDiv.setAttribute('class', 'has-text-centered has-background-light p-3')
-    columnInnerDiv.append(columnName);
-    columnInnerDiv.append(this.createForm());
 
+    let newCardButton = document.createElement('button');
+    newCardButton.setAttribute('class', 'media-right button is-small is-link');
+    newCardButton.setAttribute('id', 'newcard' + this.id)
+    let buttonSpan = document.createElement('span');
+    buttonSpan.setAttribute('class', 'icon is-small');
+    let buttonIcon = document.createElement('i');
+    buttonIcon.setAttribute('class', 'fas fa-plus');
+    buttonSpan.append(buttonIcon);
+    newCardButton.append(buttonSpan);
+    columnHeader.append(columnName, newCardButton);
+
+    let newCardForm = this.createForm();
+    let addCard = false;
+    newCardButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      addCard = !addCard;
+      if (addCard) {
+        newCardForm.style.display = "block";
+      } else {
+        newCardForm.style.display = "none";
+      }
+    });
+
+    let taskWrapper = document.createElement('div');
+    taskWrapper.setAttribute('id', 'wrapper' + this.id);
+    taskWrapper.setAttribute('ondrop', 'drop(event, this)');
+    taskWrapper.setAttribute('ondragover', 'allowDrop(event)');
   
     let boardColumn = document.createElement('div');
     boardColumn.setAttribute('class', 'column');
     boardColumn.setAttribute('id', 'column' + this.id);
-    boardColumn.append(columnInnerDiv);
+    boardColumn.append(columnHeader, newCardForm, taskWrapper);
     columnContainer.append(boardColumn);
   }
 }
