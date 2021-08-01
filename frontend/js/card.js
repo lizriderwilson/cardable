@@ -3,7 +3,6 @@ class Card {
   constructor(attrs) {
     this.id = attrs.id;
     this.name = attrs.name;
-    this.description = attrs.description;
     this.column_id = attrs.column_id;
     this.priority = attrs.priority;
     Card.allCards.push(this);
@@ -29,9 +28,7 @@ class Card {
   mediaContent.setAttribute('class', 'media-content');
   const cardName = document.createElement('h4');
   cardName.innerText = this.name;
-  const cardDescription = document.createElement('p');
-  cardDescription.innerText = this.description;
-  mediaContent.append(cardName, cardDescription);
+  mediaContent.append(cardName);
 
   const mediaRight = document.createElement('div');
   mediaRight.setAttribute('class', 'media-right');
@@ -71,7 +68,6 @@ postCard(event) {
     console.log(Card.all());
     if (card.id) {
     this.id = card.id;
-    this.description = card.description;
     this.createCard();
     }
   });
