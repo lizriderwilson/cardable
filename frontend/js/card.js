@@ -14,28 +14,28 @@ class Card {
   }
 
   createCard() {
-  let cardWrapper = document.getElementById("wrapper" + this.column_id);
+  const cardWrapper = document.getElementById("wrapper" + this.column_id);
 
-  let newCard = document.createElement('div');
+  const newCard = document.createElement('div');
   newCard.setAttribute('class', 'box has-background-white-bis');
   newCard.setAttribute('id', 'card' + this.id);
   newCard.setAttribute('draggable', 'true');
   newCard.setAttribute('ondragstart', 'drag(event)');
 
-  let cardMedia = document.createElement('article');
+  const cardMedia = document.createElement('article');
   cardMedia.setAttribute('class', 'media');
 
-  let mediaContent = document.createElement('div');
+  const mediaContent = document.createElement('div');
   mediaContent.setAttribute('class', 'media-content');
-  let cardName = document.createElement('h4');
+  const cardName = document.createElement('h4');
   cardName.innerText = this.name;
-  let cardDescription = document.createElement('p');
+  const cardDescription = document.createElement('p');
   cardDescription.innerText = this.description;
   mediaContent.append(cardName, cardDescription);
 
-  let mediaRight = document.createElement('div');
+  const mediaRight = document.createElement('div');
   mediaRight.setAttribute('class', 'media-right');
-  let deleteButton = document.createElement('button');
+  const deleteButton = document.createElement('button');
   deleteButton.setAttribute('class', 'delete has-background-warning')
   deleteButton.addEventListener('click', (e) => {
     e.preventDefault;
@@ -68,7 +68,7 @@ postCard(event) {
   .then(response => response.json())
   .then(card => {
     if (card.id) {
-    let newCard = new Card(card);
+    const newCard = new Card(card);
     newCard.createCard();
     }
   });

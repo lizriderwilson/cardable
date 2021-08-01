@@ -1,4 +1,4 @@
-let columnContainer = document.getElementById('column-container')
+const columnContainer = document.getElementById('column-container')
 
 function getColumns() {
   return fetch('http://localhost:3000/columns')
@@ -27,12 +27,12 @@ function drag(ev) {
 
 function drop(ev, el) {
   ev.preventDefault();
-  let movingCard = document.getElementById(ev.dataTransfer.getData("text"));
-  let touchedElements = document.elementsFromPoint(ev.clientX, ev.clientY);
-  let insertBeforeCard = touchedElements.find(e => e.getAttribute('id') ? e.getAttribute('id').includes('card') : false);
+  const movingCard = document.getElementById(ev.dataTransfer.getData("text"));
+  const touchedElements = document.elementsFromPoint(ev.clientX, ev.clientY);
+  const insertBeforeCard = touchedElements.find(e => e.getAttribute('id') ? e.getAttribute('id').includes('card') : false);
   insertBeforeCard ? insertBeforeCard.before(movingCard) : el.appendChild(movingCard);
 
-  let cardToUpdate = Card.all().find(card => card.id == movingCard.getAttribute('id').slice(-1));
+  const cardToUpdate = Card.all().find(card => card.id == movingCard.getAttribute('id').slice(-1));
   cardToUpdate.updateCard(el);
 
 }
