@@ -57,7 +57,7 @@ class Column {
     let buttonSpan = document.createElement('span');
     buttonSpan.setAttribute('class', 'icon is-small');
     let buttonIcon = document.createElement('i');
-    buttonIcon.setAttribute('class', 'fas fa-plus');
+    buttonIcon.setAttribute('class', 'fas fa-plus has-text-white-bis');
     buttonSpan.append(buttonIcon);
     newCardButton.append(buttonSpan);
     columnHeader.append(columnName, newCardButton);

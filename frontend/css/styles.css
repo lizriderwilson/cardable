@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Otomanopee+One&display=swap");
 /* Bulma Utilities */
 .button, .input, .textarea, .select select, .file-cta,
 .file-name {
@@ -62,8 +62,6 @@
 .box:not(:last-child), .content:not(:last-child), .notification:not(:last-child), .progress:not(:last-child), .table:not(:last-child), .table-container:not(:last-child), .title:not(:last-child),
 .subtitle:not(:last-child), .block:not(:last-child) {
   margin-bottom: 1.5rem; }
-
-button.media-right.button.is-small.is-link {border-radius:50%;}
 
 .delete {
   -webkit-touch-callout: none;
@@ -5309,7 +5307,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-family: "Nunito", sans-serif !important; }
 
 .is-family-secondary {
-  font-family: "Nunito", sans-serif !important; }
+  font-family: "Otomanopee One", sans-serif !important; }
 
 .is-family-sans-serif {
   font-family: "Nunito", sans-serif !important; }
