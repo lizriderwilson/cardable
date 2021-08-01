@@ -67,9 +67,12 @@ postCard(event) {
   })
   .then(response => response.json())
   .then(card => {
+    console.log(card.name);
+    console.log(Card.all());
     if (card.id) {
-    const newCard = new Card(card);
-    newCard.createCard();
+    this.id = card.id;
+    this.description = card.description;
+    this.createCard();
     }
   });
 }
