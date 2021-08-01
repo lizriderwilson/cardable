@@ -33,6 +33,6 @@ function drop(ev, el) {
   insertBeforeCard ? insertBeforeCard.before(movingCard) : el.appendChild(movingCard);
 
   const cardToUpdate = Card.all().find(card => card.id == movingCard.getAttribute('id').slice(-1));
-  cardToUpdate.updateCard(el);
+  cardToUpdate.moveColumn(el);
 
 }

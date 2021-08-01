@@ -64,8 +64,6 @@ postCard(event) {
   })
   .then(response => response.json())
   .then(card => {
-    console.log(card.name);
-    console.log(Card.all());
     if (card.id) {
     this.id = card.id;
     this.createCard();
@@ -73,7 +71,7 @@ postCard(event) {
   });
 }
 
-updateCard(el) {
+moveColumn(el) {
   const columnId = el.id.slice(-1);
   const cardId = this.id;
   const data = {
