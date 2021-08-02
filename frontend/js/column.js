@@ -76,6 +76,7 @@ class Column {
 
     const taskWrapper = document.createElement('div');
     taskWrapper.setAttribute('id', 'wrapper' + this.id);
+    taskWrapper.setAttribute('class', 'wrapper');
     taskWrapper.setAttribute('ondrop', 'drop(event, this)');
     taskWrapper.setAttribute('ondragover', 'allowDrop(event)');
   

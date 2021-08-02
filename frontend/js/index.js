@@ -32,7 +32,7 @@ function drop(ev, el) {
   const insertBeforeCard = touchedElements.find(e => e.getAttribute('id') ? e.getAttribute('id').includes('card') : false);
   insertBeforeCard ? insertBeforeCard.before(movingCard) : el.appendChild(movingCard);
 
-  const cardToUpdate = Card.all().find(card => card.id == movingCard.getAttribute('id').slice(-1));
+  const cardToUpdate = Card.all().find(card => card.id == movingCard.getAttribute('id').slice(4));
   cardToUpdate.moveColumn(el);
 
 }

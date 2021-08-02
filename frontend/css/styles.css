@@ -5488,3 +5488,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 @media screen and (min-width: 1024px) {
   .is-invisible-desktop {
     visibility: hidden !important; } }
+
+.wrapper {
+  min-height: 50px;
+}
